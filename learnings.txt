@@ -19,3 +19,6 @@ printf - need stdio
 ctype.h => testing and mapping characters (ASCII etc.)
 CTRL-S/Q - software flow control (pause/resume transmission)
 
+Flag Summary:
+
+
