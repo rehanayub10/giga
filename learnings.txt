@@ -1,0 +1,21 @@
+Unistd
+- key presses, interactions etc. Kinda misc though
+STDIN_FILENO = 0 (standard input)
+tcgetattr => get terminal params
+
+Termios 
+- terminal properties: https://pubs.opengroup.org/onlinepubs/009696799/basedefs/termios.h.html
+- input/output/local modes, set flags
+
+Bit masking - ex: https://stackoverflow.com/questions/20948621/what-does-mean
+unsigned int mask = 1 << 11;  // mask for 12th bit
+a |=  mask;  // set 12th bit to 1
+a &= ~mask;  // set 12th bit to 0
+
+Canonical mode = input read line-by-line 
+Byte-by-byte => disable ICANON flag
+
+printf - need stdio
+ctype.h => testing and mapping characters (ASCII etc.)
+CTRL-S/Q - software flow control (pause/resume transmission)
+
