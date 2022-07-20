@@ -20,5 +20,13 @@ ctype.h => testing and mapping characters (ASCII etc.)
 CTRL-S/Q - software flow control (pause/resume transmission)
 
 Flag Summary:
+ISIG => Turn off CTRL-C/CTRL-Z (terminate/suspend signals)
+IXON => Turn off CTRL-S/CTRL-Q (pause/resume transmission signals)
+IEXTEN => Turn off CTRL-V (waits to type another char before printing)
+ICNRL => Turn off CTRL-M (carriage return to newline)
+OPOST => Turn off all output processing (\n to \r\n)
+BRKINT, INPCK, ISTRIP, CS8 => Legacy flags
+    https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html
 
+\0 == NULL character
 
