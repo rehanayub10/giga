@@ -1,12 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
 
+struct termios orig_termios;
+
+void disableRawMode() {
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+}
+
+void enableRawMode() {
+    tcgetattr(STDIN_FILENO, &orig_termios);
+    atexit(disableRawMode);
+    
+    struct termios termios_p = orig_termios;
+    termios_p.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
+                           | INLCR | IGNCR | ICRNL | IXON);
+    termios_p.c_oflag &= ~OPOST;
+    termios_p.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
+    termios_p.c_cflag &= ~(CSIZE | PARENB);
+    termios_p.c_cflag |= CS8;
+
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &termios_p);
+}
+
 int main() {
+    enableRawMode();
+    
     char c;
     while (1) {
         read(STDIN_FILENO, &c, 1);
-        printf("%c", c);
+        printf("%c\r\n", c);
         if (c == 'q') break;
     }
     
