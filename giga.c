@@ -42,16 +42,32 @@ void enableRawMode() {
 
 /*** input ***/
 
+char editorReadKey() {
+    char c = '\0';
+    read(STDIN_FILENO, &c, 1);
+
+    return c;
+}
+
+void editorProcessKeypress() {
+   char c = editorReadKey();
+
+    switch(c) {
+        case CTRL_KEY('q'):
+            exit(0);
+            break;
+        default:
+            printf("%c\r\n", c);
+    }
+}
+
 /*** init ***/
 
 int main() {
     enableRawMode();
     
     while (1) {
-        char c = '\0';
-        read(STDIN_FILENO, &c, 1);
-        if (c == CTRL_KEY('q')) break;
-        printf("%c\r\n", c);
+        editorProcessKeypress();
     }
     
     return 0;
